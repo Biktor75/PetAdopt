@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>PetAdopt</title>
+    <h:outputStylesheet library="css" name="estilo.css"/>
+</h:head>
+<h:body>
+
+    <h:form>
+        <p:menubar>
+
+            <p:menuitem value="Inicio" url="#{request.contextPath}/index.xhtml" />
+
+            <!-- Opciones visibles solo para usuarios autenticados -->
+            <p:menuitem value="Zona Cliente" url="#{request.contextPath}/cliente/inicio.xhtml"
+                        rendered="#{facesContext.externalContext.isUserInRole('cliente')}" />
+            <p:menuitem value="Zona Refugio" url="#{request.contextPath}/refugio/inicio.xhtml"
+                        rendered="#{facesContext.externalContext.isUserInRole('refugio')}" />
+            <p:menuitem value="Zona Admin" url="#{request.contextPath}/admin/inicio.xhtml"
+                        rendered="#{facesContext.externalContext.isUserInRole('admin')}" />
+
+            <!-- Mostrar solo si NO ha iniciado sesión -->
+            <p:menuitem value="Login" url="#{request.contextPath}/login/login.xhtml"
+                        rendered="#{facesContext.externalContext.userPrincipal == null}" />
+            <p:menuitem value="Registro" url="#{request.contextPath}/login/registro.xhtml"
+                        rendered="#{facesContext.externalContext.userPrincipal == null}" />
+
+            <!-- Mostrar solo si ha iniciado sesión -->
+            <p:menuitem value="Cerrar sesión" action="#{loginBean.logout}"
+                        rendered="#{facesContext.externalContext.userPrincipal != null}" />
+
+        </p:menubar>
+    </h:form>
+
+    <h:form>
+        <ui:insert name="contenido"/>
+    </h:form>
+
+</h:body>
+</html>
