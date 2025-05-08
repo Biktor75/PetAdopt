@@ -30,15 +30,17 @@
                 <!-- Botones de sesión -->
                 <h:panelGroup layout="block" style="display: flex; align-items: center; gap: 10px;">
                     <!-- Botones para usuarios no autenticados -->
-                    <p:commandButton value="Iniciar sesión" action="login"
+                    <!--<p:commandButton value="Iniciar sesión" outcome="/login.xhtml"
                                      rendered="#{!request.isUserInRole('users')}" icon="pi pi-sign-in" />
-                    <p:commandButton value="Registro" action="/registro.xhtml"
+                    <p:commandButton value="Registro" outcome="/registro.xhtml"
                                      rendered="#{!request.isUserInRole('users')}" icon="pi pi-user-plus" />
+                    -->
 
-                    <!--p:menuButton value="Sesión"
+                    <p:menuButton value="Sesión"
                                   rendered="#{!request.isUserInRole('users')}" icon="pi pi-user">
-                        <p:menuitem value="Iniciar sesión" action="#{loginView.logout}" icon="pi pi-power-off"/>
-                    </p:menuButton-->
+                        <p:menuitem value="Iniciar sesión" outcome="/login.xhtml" icon="pi pi-power-off"/>
+                        <p:menuitem value="Registro" outcome="/registro.xhtml" icon="pi pi-power-off"/>
+                    </p:menuButton>
                     
                     <!-- Menú para usuarios autenticados -->
                     <p:menuButton value="#{loginView.authenticatedUser.name}"
